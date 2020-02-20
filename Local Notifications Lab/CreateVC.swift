@@ -20,6 +20,9 @@ class CreateVC: UIViewController {
     weak var delegate: CreateVCDelegate?
     
     private var userSeconds = 0.0
+    private var userMin = 0.0
+    private var userHour = 0.0
+    private var totalTime = 0.0
     
     private var timeInterval: TimeInterval = Date().timeIntervalSinceNow
     
@@ -52,7 +55,7 @@ class CreateVC: UIViewController {
             print("no image found")
         }
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval + userSeconds, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval + totalTime, repeats: false)
         
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
         
@@ -112,16 +115,17 @@ extension CreateVC: UIPickerViewDelegate, UIPickerViewDataSource {
         switch component {
         case 0:
             hour = row
-            userSeconds += Double(row) * 3600
-            print(row)
+            userHour = Double(row) * 3600
         case 1:
             minutes = row
-            userSeconds += Double(row) * 60
+            userMin = Double(row) * 60
         case 2:
             seconds = row
-            userSeconds += Double(row) * 1
+            userSeconds = Double(row) * 1
         default:
             break;
         }
+        totalTime = userHour + userMin + userSeconds
+        print(totalTime)
     }
 }
