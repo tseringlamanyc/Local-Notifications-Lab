@@ -113,6 +113,7 @@ extension CreateVC: UIPickerViewDelegate, UIPickerViewDataSource {
         case 0:
             hour = row
             userSeconds += Double(row) * 3600
+            print(row)
         case 1:
             minutes = row
             userSeconds += Double(row) * 60
